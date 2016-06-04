@@ -23,7 +23,7 @@ namespace CopyDocs
         private static String CreateDestinationPath(string sourcePath, string destinationPathPrefix)
         {
             string folderToCopy = new DirectoryInfo(sourcePath).Name;
-            string currentDateTime = DateTime.Now.ToString();
+            string currentDateTime = CreateTimestampString();
             string backupFolderName = $"{folderToCopy}-{currentDateTime}";
             return Path.Combine(destinationPathPrefix, backupFolderName);
         }
@@ -31,13 +31,7 @@ namespace CopyDocs
         private static String CreateTimestampString()
         {
             DateTime currentDateTime = DateTime.Now;
-            var year = currentDateTime.Year.ToString();
-            var month = currentDateTime.Month.ToString();
-            var day = currentDateTime.Day.ToString();
-            var hour = currentDateTime.Hour.ToString();
-            var minute = currentDateTime.Minute.ToString();
-            var second = currentDateTime.Second.ToString();
-            return $"{year}{month}{day}{hour}{minute}{second}";
+            return currentDateTime.ToString("yyyyMMddHHmmss");
         }
 
         private static void DirectoryCopy(string sourcePath, string destinationPath)
